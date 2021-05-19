@@ -44,10 +44,8 @@ jobs:
         run: dotnet test -c "Release"
       - name: Publish
         run: dotnet publish -c "Release" -r "win-x64" -o ./publish /p:Version="1.0.0" /p:SourceRevisionId="${{ steps.git_short_hash.outputs.result }}" /p:ExtraDefineConstants=DISABLE_UPDATER Ryujinx
-        if: github.event_name == 'pull_request'
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: ryujinx-Release-1.0.0+${{ steps.git_short_hash.outputs.result }}-win_x64
           path: publish
-        if: github.event_name == 'pull_request'
